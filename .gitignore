@@ -77,3 +77,6 @@ typings/
 
 #Config folder
 .config/
+
+#Storage Folder
+.server/
