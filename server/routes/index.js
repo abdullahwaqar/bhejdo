@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
 
-router.get('/', (req, res) => {
-    return res.status(200).json({
-        verion: 0.1
-    });
+router.get('/', function(req, res, next) {
+  res.json({
+    version: '0.0.1'
+  });
 });
 
 module.exports = router;
