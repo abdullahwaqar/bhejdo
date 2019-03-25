@@ -39,4 +39,17 @@ router.post('/upload', (req, res, next) => {
     });
 });
 
+/*
+* @desc: Route for downloading a file
+* @params: Token for a file
+*/
+router.get('/download/:token', (req, res, next) => {
+    const fileName = req.params.token;
+    const filePath = path.join(__dirname, '../../', 'storage/uploads', fileName);
+    res.download(filePath, fileName, (err) => {
+        if (err) {
+            ErrorResponse(res, next, 404, 'File Not Found.');
+        }
+    });
+});
 module.exports = router;
