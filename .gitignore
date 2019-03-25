@@ -79,4 +79,4 @@ typings/
 config/
 
 #Storage Folder
-storage/
+server/storage/

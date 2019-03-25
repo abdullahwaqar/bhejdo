@@ -8,6 +8,7 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 
 const ErrorResponse = require('../../middlewares/ErrorResponse');
+const FileModel = require('../../models/File');
 
 //* Modified options for file upload
 router.use(fileUpload());
@@ -32,8 +33,20 @@ router.post('/upload', (req, res, next) => {
         if (err) {
             ErrorResponse(res, next, 500, 'Error Uploading.');
         } else {
-            res.json({
-                success: true
+            newFileUpload = new FileModel({
+                original_file_name: uploadFilename,
+                file_size: req.files.upload.size,
+                file_md5: req.files.upload.md5,
+                file_mime_type: req.files.upload.mimetype
+            });
+            newFileUpload.save((err, result) => {
+                if (err) {
+                    ErrorResponse(res, next, 500, 'Error Uploading.');
+                } else {
+                    res.json({
+                        success: true
+                    });
+                }
             });
         }
     });
