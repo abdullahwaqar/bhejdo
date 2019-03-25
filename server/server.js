@@ -11,6 +11,7 @@ const db_uri = require('./config/keys').mongoURI;
 
 //* Requiring for all the routers
 const indexRouter = require('./routes/index');
+const uploadRouter = require('./routes/api');
 
 //*? Setting up middleware here
 app.use(volleyball);
@@ -25,6 +26,8 @@ mongoose.connect(db_uri, {useNewUrlParser: true, autoIndex: false}, () => {
 //* Mapping the routers on url end points
 //? Index route
 app.use('/', indexRouter);
+//? Upload route
+app.use('/api/', uploadRouter);
 
 //* Error handlers Middleware
 const errorHandler = require('./middlewares/errors');
