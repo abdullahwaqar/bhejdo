@@ -57,12 +57,24 @@ router.post('/upload', (req, res, next) => {
 * @params: Token for a file
 */
 router.get('/download/:token', (req, res, next) => {
-    const fileName = req.params.token;
-    const filePath = path.join(__dirname, '../../', 'storage/uploads', fileName);
-    res.download(filePath, fileName, (err) => {
+    const fileId = req.params.token;
+    FileModel.findById(fileId, (err, result) => {
         if (err) {
-            ErrorResponse(res, next, 404, 'File Not Found.');
+            ErrorResponse(res, next, 500, 'Internal Server Error');
+        } else {
+            if (result) {
+                const fileName = result.original_file_name;
+                const filePath = path.join(__dirname, '../../', 'storage/uploads', fileName);
+                res.download(filePath, fileName, (err) => {
+                    if (err) {
+                        ErrorResponse(res, next, 404, 'File Not Found.');
+                    }
+                });
+            } else {
+                ErrorResponse(res, next, 404, 'File Not Found.');
+            }
         }
     });
 });
+
 module.exports = router;
