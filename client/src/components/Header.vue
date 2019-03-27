@@ -2,7 +2,7 @@
     <div>
         <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
+                <a class="navbar-item" href="#">
                 <img src="../assets/bhejdo-logo.svg" width="112" height="28">
                 </a>
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -15,11 +15,8 @@
                 <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                    <a class="button is-primary">
-                        <strong>Sign up</strong>
-                    </a>
-                    <a class="button is-light">
-                        Log in
+                    <a class="button is-info is-outlined">
+                        Sign up/in
                     </a>
                     </div>
                 </div>

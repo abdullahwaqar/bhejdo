@@ -6,35 +6,41 @@
                     <div class="column">
                         <div class="level-left">
                             <div class="level-item">
-                                <b-field>
-                                    <b-upload v-model="dropFiles"
-                                        multiple
-                                        drag-drop>
-                                        <section class="section">
-                                            <div class="content has-text-centered">
-                                                <p>
-                                                    <img class="upload-icon" src="../assets/upload.svg">
-                                                    <!-- <b-icon
-                                                        icon="../assets/upload.svg"
-                                                        size="is-large">
-                                                    </b-icon> -->
-                                                </p>
-                                                <p>Drop your files here or click to upload</p>
+                                <div class="box has-background-white-ter expand-box">
+                                    <div class="tile is-ancestor">
+                                        <div class="tile is-12 is-vertical is-parent">
+                                            <div class="tile is-child box expand-tile-box">
+                                                <b-field class="file">
+                                                    <b-upload v-model="file">
+                                                        <a class="button is-info is-outlined">
+                                                            <b-icon icon="upload"></b-icon>
+                                                            <span>Click to upload</span>
+                                                        </a>
+                                                    </b-upload>
+                                                    <span class="file-name" v-if="file">
+                                                        {{ file.name }}
+                                                    </span>
+                                                </b-field>
                                             </div>
-                                        </section>
-                                    </b-upload>
-                                </b-field>
-
-                                <div class="tags">
-                                    <span v-for="(file, index) in dropFiles"
-                                        :key="index"
-                                        class="tag is-primary" >
-                                        {{file.name}}
-                                        <button class="delete is-small"
-                                            type="button"
-                                            @click="deleteDropFile(index)">
-                                        </button>
-                                    </span>
+                                                <div class="tile is-child box">
+                                                    <div>
+                                                        <div class="block">
+                                                            <b-checkbox v-model="protectWithPassword"
+                                                                native-value="true">
+                                                                Protect With Password
+                                                            </b-checkbox>
+                                                            <b-field v-if="protectWithPassword" label="Password">
+                                                                <b-input type="password"
+                                                                    v-model="password"
+                                                                    password-reveal>
+                                                                </b-input>
+                                                            </b-field>
+                                                            <a class="button is-fullwidth is-info">Upload</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -48,6 +54,7 @@
                                     <br>
                                     So you can keep what you share private and make sure your stuff doesn’t stay online forever.
                                 </p>
+                                <img class="right-logo" src="../assets/bhejdo-logo-outline.svg">
                             </div>
                         </div>
 
@@ -63,13 +70,15 @@ export default {
     name: 'UploadForm',
     data() {
             return {
-                dropFiles: []
+                file: null,
+                protectWithPassword: false,
+                password: ''
             }
         },
         methods: {
-            deleteDropFile(index) {
-                this.dropFiles.splice(index, 1)
-            }
+            snackbar() {
+                this.$snackbar.open(`Default, positioned bottom-right with a green 'OK' button`)
+            },
         }
 }
 </script>
@@ -86,5 +95,20 @@ export default {
 
 .upload-icon {
     opacity: 0.1;
+}
+
+.right-logo {
+    width: 100px;
+    padding-top: 20px;
+    opacity: 0.4;
+}
+
+.expand-box {
+    width: 500px;
+    height: 500px;
+}
+
+.expand-tile-box {
+    height: 800px;
 }
 </style>
