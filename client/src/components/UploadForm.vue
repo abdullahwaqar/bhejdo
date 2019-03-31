@@ -13,11 +13,10 @@
                                                 <b-field class="file">
                                                     <b-upload v-model="file">
                                                         <a class="button is-info is-outlined">
-                                                            <b-icon icon="upload"></b-icon>
                                                             <span>Click to upload</span>
                                                         </a>
                                                     </b-upload>
-                                                    <span class="file-name" v-if="file">
+                                                    <span class="file-name " v-if="file">
                                                         {{ file.name }}
                                                     </span>
                                                 </b-field>
@@ -35,7 +34,8 @@
                                                                     password-reveal>
                                                                 </b-input>
                                                             </b-field>
-                                                            <a class="button is-fullwidth is-info">Upload</a>
+                                                            <a v-show="!isUploading" @click.prevent="upload()" class="button is-fullwidth is-info">Upload</a>
+                                                            <a v-show="isUploading" class="button is-fullwidth is-info is-loading">Loading</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -72,13 +72,35 @@ export default {
             return {
                 file: null,
                 protectWithPassword: false,
-                password: ''
+                password: '',
+                isUploading: false
             }
         },
         methods: {
-            snackbar() {
-                this.$snackbar.open(`Default, positioned bottom-right with a green 'OK' button`)
+            noFileSelectedError() {
+                this.$snackbar.open({
+                    duration: 5000,
+                    message: 'No File Selected',
+                    type: 'is-danger',
+                    position: 'is-bottom-left',
+                    actionText: 'Ok',
+                    queue: false,
+                    // onAction: () => {
+                    //     this.$toast.open({
+                    //         message: 'Action pressed',
+                    //         queue: false
+                    //     })
+                    // }
+                })
             },
+            upload() {
+                console.log(this.file);
+                if (this.file === null) {
+                    this.noFileSelectedError();
+                } else {
+                    this.isUploading = true;
+                }
+            }
         }
 }
 </script>
