@@ -124,7 +124,9 @@ export default {
                             });
                         }
                     }).then((result) => {
+                        this.isUploading = false;
                         console.log(result);
+                        this.$router.push()
                     });
                 }
             }
