@@ -66,6 +66,8 @@
 </template>
 
 <script>
+const UPLOAD_API_URL = 'http://localhost:5000/api/upload';
+
 export default {
     name: 'UploadForm',
     data() {
@@ -74,6 +76,14 @@ export default {
                 protectWithPassword: false,
                 password: '',
                 isUploading: false
+            }
+        },
+        watch: {
+            file: {
+                handler() {
+                    this.isUploading = false;
+                },
+                deep: true
             }
         },
         methods: {
@@ -94,11 +104,28 @@ export default {
                 })
             },
             upload() {
-                console.log(this.file);
                 if (this.file === null) {
                     this.noFileSelectedError();
                 } else {
+                    //* Toggle the loading animation
                     this.isUploading = true;
+                    let formData = new FormData();
+                    formData.append('upload', this.file);
+                    const fetch_config = {
+                        method: 'POST',
+                        body: formData
+                    };
+                    fetch(UPLOAD_API_URL, fetch_config).then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            response.json().then((error) => {
+                                throw new Errorr(error.message);
+                            });
+                        }
+                    }).then((result) => {
+                        console.log(result);
+                    });
                 }
             }
         }

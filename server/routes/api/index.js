@@ -19,6 +19,7 @@ router.use(fileUpload());
 * @params: Defaults
 */
 router.post('/upload', (req, res, next) => {
+    // console.log(req);
     if (Object.keys(req.files).length == 0) {
         ErrorResponse(res, next, 400, 'No files were uploaded.');
     }
@@ -44,7 +45,10 @@ router.post('/upload', (req, res, next) => {
                     ErrorResponse(res, next, 500, 'Error Uploading.');
                 } else {
                     res.json({
-                        success: true
+                        success: true,
+                        file: {
+                            result
+                        }
                     });
                 }
             });
