@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import Home from './views/Home.vue'
+import Download from './views/Download.vue'
 
 Vue.use(Router);
 Vue.use(Buefy);
@@ -13,6 +14,12 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/download/:token',
+      name: 'download',
+      component: Download,
+      props: true
     },
     // {
     //   path: '/about',

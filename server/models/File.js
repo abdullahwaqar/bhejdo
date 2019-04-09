@@ -21,6 +21,9 @@ const FileSchema = new Schema({
     uploaded_at: {
         type: Date,
         default: Date.now()
+    },
+    password_protected: {
+        type: String
     }
 });
 

@@ -19,17 +19,15 @@ router.use(fileUpload());
 * @params: Defaults
 */
 router.post('/upload', (req, res, next) => {
-    // console.log(req);
+    console.log(req.body.password);
     if (Object.keys(req.files).length == 0) {
         ErrorResponse(res, next, 400, 'No files were uploaded.');
     }
-    console.log(req.files.upload);
     //* The name of the input field is used to retrieve the uploaded file
     const uploadFile = req.files.upload;
     const uploadFilename = req.files.upload.name;
     const uploadPath = path.join(__dirname, '../../', 'storage/uploads', uploadFilename);
     //* Use the mv() method to place the file somewhere on your server
-    console.log(uploadPath);
     uploadFile.mv(uploadPath, (err) => {
         if (err) {
             ErrorResponse(res, next, 500, 'Error Uploading.');
@@ -38,7 +36,8 @@ router.post('/upload', (req, res, next) => {
                 original_file_name: uploadFilename,
                 file_size: req.files.upload.size,
                 file_md5: req.files.upload.md5,
-                file_mime_type: req.files.upload.mimetype
+                file_mime_type: req.files.upload.mimetype,
+                password_protected: req.body.password
             });
             newFileUpload.save((err, result) => {
                 if (err) {

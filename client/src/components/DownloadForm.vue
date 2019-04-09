@@ -45,20 +45,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column">
-                        <div class="level-right">
-                            <div>
-                                <h1 class="is-size-3">Simple, private file sharing</h1>
-                                <p class="has-text-grey">
-                                    Bhejdo lets you share files with end-to-end encryption and a link that automatically expires.
-                                    <br>
-                                    So you can keep what you share private and make sure your stuff doesn’t stay online forever.
-                                </p>
-                                <img class="right-logo" src="../assets/bhejdo-logo-outline.svg">
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>
@@ -69,7 +55,7 @@
 const UPLOAD_API_URL = 'http://localhost:5000/api/upload';
 
 export default {
-    name: 'UploadForm',
+    name: 'DownloadForm',
     data() {
             return {
                 file: null,
@@ -95,7 +81,13 @@ export default {
                     position: 'is-bottom-left',
                     actionText: 'Ok',
                     queue: false,
-                });
+                    // onAction: () => {
+                    //     this.$toast.open({
+                    //         message: 'Action pressed',
+                    //         queue: false
+                    //     })
+                    // }
+                })
             },
             upload() {
                 if (this.file === null) {
@@ -105,8 +97,6 @@ export default {
                     this.isUploading = true;
                     let formData = new FormData();
                     formData.append('upload', this.file);
-                    formData.append('password', this.protectWithPassword ? this.password : null);
-                    console.log(formData);
                     const fetch_config = {
                         method: 'POST',
                         body: formData
