@@ -106,7 +106,6 @@ export default {
                     let formData = new FormData();
                     formData.append('upload', this.file);
                     formData.append('password', this.protectWithPassword ? this.password : null);
-                    console.log(formData);
                     const fetch_config = {
                         method: 'POST',
                         body: formData
@@ -120,9 +119,11 @@ export default {
                             });
                         }
                     }).then((result) => {
-                        this.isUploading = false;
-                        console.log(result);
-                        this.$router.push()
+                        console.log(result.file.result._id);
+                        setTimeout(() => {
+                            this.isUploading = false;
+                            this.$router.push({ path: `/download/${result.file.result._id}` });
+                        }, 1000);
                     });
                 }
             }

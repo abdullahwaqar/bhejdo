@@ -1,6 +1,7 @@
 <template>
     <section class="is-vcentered">
         <div class="box">
+            <h1>{{ $route.params.token }}</h1>
             <div class="columns">
                 <div class="level">
                     <div class="column">
@@ -81,13 +82,7 @@ export default {
                     position: 'is-bottom-left',
                     actionText: 'Ok',
                     queue: false,
-                    // onAction: () => {
-                    //     this.$toast.open({
-                    //         message: 'Action pressed',
-                    //         queue: false
-                    //     })
-                    // }
-                })
+                });
             },
             upload() {
                 if (this.file === null) {
