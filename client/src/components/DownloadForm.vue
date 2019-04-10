@@ -1,13 +1,13 @@
 <template>
     <section class="is-vcentered">
         <div class="box">
-            <h1>{{ $route.params.token }}</h1>
+            <!-- <h1>{{ $route.params.token }}</h1> -->
             <div class="columns">
                 <div class="level">
                     <div class="column">
                         <div class="level-left">
                             <div class="level-item">
-                                <div class="box has-background-white-ter expand-box">
+                                <div class="box has-background-white-ter expand-box cus-pd-top">
                                     <div class="tile is-ancestor">
                                         <div class="tile is-12 is-vertical is-parent">
                                             <div class="tile is-child box expand-tile-box">
@@ -142,5 +142,9 @@ export default {
 
 .expand-tile-box {
     height: 800px;
+}
+
+.cus-pd-top {
+    padding-top: 100px;
 }
 </style>
