@@ -68,6 +68,7 @@ router.get('/download/:token', (req, res, next) => {
             if (result) {
                 const fileName = result.original_file_name;
                 const filePath = path.join(__dirname, '../../', 'storage/uploads', fileName);
+                console.log(result)
                 res.download(filePath, fileName, (err) => {
                     if (err) {
                         ErrorResponse(res, next, 404, 'File Not Found.');
