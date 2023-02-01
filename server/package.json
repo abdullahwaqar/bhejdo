@@ -13,7 +13,7 @@
     "express": "~4.16.0",
     "express-fileupload": "^1.1.9",
     "http-errors": "~1.6.2",
-    "mongoose": "^5.7.5",
+    "mongoose": "^5.13.15",
     "volleyball": "^1.5.1"
   },
   "devDependencies": {
